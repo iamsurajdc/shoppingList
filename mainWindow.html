@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ShoppingList</title>
+    <title>Suraj</title>
 </head>
 <body>
     <h1>Shopping List</h1>
+    <ul></ul>
+
+    <script>
+            const electron = require("electron");
+            const {ipcRenderer} = electron;
+            const ul = document.querySelector('ul');
+
+            // Add Item
+            ipcRenderer.on('item:add', (e, item) => {
+                const li  = document.createElement('li');
+                const itemText = document.createTextNode(item);
+                li.appendChild(itemText);
+                ul.appendChild(li);
+            });
+
+            // clear Item
+            ipcRenderer.on('item:clear', () => {
+                ul.innerHTML = '';
+            });
+
+        </script>
+
 </body>
 </html>
